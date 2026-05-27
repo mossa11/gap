@@ -1,0 +1,100 @@
+//project 1 answer:
+VAR
+   tab : ARRAY_OF INTEGER[5]; // declaring the array and define its length.
+   i : INTEGER; // declaring the index for each element in the array.
+BEGIN
+  tab := {1,2,3,5,7,8}; // inserting the elements directly in the array.
+  Write('Print Array :')
+  FOR i FROM 0 TO 4 STEP 1  DO   // the index of arrays start from 0;
+     Write(tab[i]) // to access the element, we use the name_array[indexation]
+  END_FOR
+
+// another version
+   FOR i FROM 0 TO tab.length-1 STEP 1  DO
+   // here we can replace the static
+   //number in the max field using the `.length` property
+       Write(tab[i])
+   END_FOR
+END
+
+//project 2 answer:
+VAR
+   n, size, i, j : INTEGER;
+   v1, v2 : ARRAY_OF INTEGER[100];
+   ps : INTEGER;
+
+/////////////////////////////////////////////////////
+// Procedure to calculate the dot product
+/////////////////////////////////////////////////////
+
+PROCEDURE dot_product(v1 : ARRAY_OF INTEGER,
+                      v2 : ARRAY_OF INTEGER,
+                      size : INTEGER,
+                      VAR ps : INTEGER)
+
+VAR
+   i : INTEGER;
+
+BEGIN
+
+   ps := 0;
+
+   FOR i FROM 0 TO size-1 STEP 1 DO
+
+      ps := ps + (v1[i] * v2[i]);
+
+   END_FOR
+
+END_PROCEDURE
+
+
+/////////////////////////////////////////////////////
+// Main Algorithm
+/////////////////////////////////////////////////////
+
+BEGIN
+
+   Write("Enter number of pairs of vectors : ");
+   Read(n);
+
+   // outer loop for n pairs of vectors
+   FOR i FROM 1 TO n STEP 1 DO
+
+      Write("Enter size of vectors : ");
+      Read(size);
+
+      Write("Enter elements of vector v1 : ");
+
+      // loop for filling vector v1
+      FOR j FROM 0 TO size-1 STEP 1 DO
+         Read(v1[j]);
+      END_FOR
+
+
+      Write("Enter elements of vector v2 : ");
+
+      // loop for filling vector v2
+      FOR j FROM 0 TO size-1 STEP 1 DO
+         Read(v2[j]);
+      END_FOR
+
+
+      // call the procedure
+      CALL dot_product(v1, v2, size, ps);
+
+
+      Write("Dot product = ", ps);
+
+
+      // check orthogonality
+      IF ps = 0 THEN
+         Write("The vectors are orthogonal");
+      ELSE
+         Write("The vectors are not orthogonal");
+      END_IF
+
+   END_FOR
+
+END
+
+
